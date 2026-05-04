@@ -8,11 +8,30 @@ import Loading from "@/components/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+const STATUS_OPTIONS = ["Order Placed", "Processing", "Shipped", "Delivered"];
+
 const Orders = () => {
   const { currency, getToken, user } = useAppContext();
 
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const updateStatus = async (orderId, status) => {
+    try {
+      const token = await getToken();
+      const { data } = await axios.patch('/api/order/update-status', { orderId, status }, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (data.success) {
+        setOrders((prev) => prev.map((o) => o._id === orderId ? { ...o, status } : o));
+        toast.success("Status updated");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const fetchSellerOrders = async () => {
     try {
@@ -85,10 +104,18 @@ const Orders = () => {
                   {currency}{order.amount}
                 </p>
                 <div>
-                  <p className="flex flex-col">
+                  <p className="flex flex-col gap-2">
                     <span>Method : COD</span>
                     <span>Date : {new Date(order.date).toLocaleDateString()}</span>
-                    <span>Payment : Pending</span>
+                    <select
+                      value={order.status}
+                      onChange={(e) => updateStatus(order._id, e.target.value)}
+                      className="border border-gray-300 rounded px-2 py-1 text-xs outline-none focus:border-orange-500"
+                    >
+                      {STATUS_OPTIONS.map((s) => (
+                        <option key={s} value={s}>{s}</option>
+                      ))}
+                    </select>
                   </p>
                 </div>
               </div>

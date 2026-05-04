@@ -31,6 +31,28 @@ const OrderSummary = () => {
     }
   };
 
+  const deleteAddress = async (addressId, e) => {
+    e.stopPropagation();
+    try {
+      const token = await getToken();
+      const { data } = await axios.delete(`/api/user/delete-address?id=${addressId}`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      if (data.success) {
+        const updated = userAddresses.filter((a) => a._id !== addressId);
+        setUserAddresses(updated);
+        if (selectedAddress?._id === addressId) {
+          setSelectedAddress(updated[0] || null);
+        }
+        toast.success("Address removed");
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const handleAddressSelect = (address) => {
     setSelectedAddress(address);
     setIsDropdownOpen(false);
@@ -114,10 +136,16 @@ const OrderSummary = () => {
                 {userAddresses.map((address, index) => (
                   <li
                     key={index}
-                    className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
+                    className="flex items-center justify-between px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
                     onClick={() => handleAddressSelect(address)}
                   >
-                    {address.fullName}, {address.area}, {address.city}, {address.state}
+                    <span>{address.fullName}, {address.area}, {address.city}, {address.state}</span>
+                    <button
+                      onClick={(e) => deleteAddress(address._id, e)}
+                      className="ml-2 text-red-500 hover:text-red-700 text-xs shrink-0"
+                    >
+                      ✕
+                    </button>
                   </li>
                 ))}
                 <li

@@ -41,9 +41,9 @@ export const AppContextProvider = (props) => {
 
   const fetchUserData = async () => {
     try {
-      if (user?.publicMetadata?.role === "seller") {
-        setIsSeller(true);
-      }
+      // TEMPORARY: Enable seller for all logged-in users
+      // Remove this once you configure seller role in Clerk dashboard
+      setIsSeller(true);
 
       const token = await getToken();
 

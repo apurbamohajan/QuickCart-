@@ -91,7 +91,14 @@ const MyOrders = () => {
                     <p className="flex flex-col">
                       <span>Method : COD</span>
                       <span>Date : {new Date(order.date).toLocaleDateString()}</span>
-                      <span>Payment : Pending</span>
+                      <span className={`font-medium mt-1 ${
+                        order.status === 'Delivered' ? 'text-green-600' :
+                        order.status === 'Shipped' ? 'text-blue-600' :
+                        order.status === 'Processing' ? 'text-orange-500' :
+                        'text-gray-500'
+                      }`}>
+                        {order.status}
+                      </span>
                     </p>
                   </div>
                 </div>
