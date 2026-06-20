@@ -1,69 +1,64 @@
-# QuickCart - A simple eCommerce website
+<!-- Improved README for QuickCart frontend -->
+# QuickCart
 
-QuickCart is an open-source **Next.js eCommerce frontend** project.  
-It provides a modern, fast and customizable shopping UI.  
-This repo is **frontend only** – contributors can improve the design, add new pages, animations and more.
+QuickCart is a lightweight, open-source Next.js + Tailwind CSS frontend for an eCommerce experience. It provides a fast, responsive UI and modular components so you can iterate quickly on product listings, cart flows, and seller views.
 
----
+## Key Points
+
+- **Frontend-only**: This repository contains the Next.js app and UI components (no hosted backend). The app expects API routes under `app/api/*` (already present for demo/test data).
+- **Tech stack**: Next.js (App Router), React, Tailwind CSS, Inngest hooks (for background tasks), and a small Node-style API routes folder structure.
 
 ## Features
 
--   Built with **Next.js + Tailwind CSS**
--   Responsive design
--   Reusable components
--   Customizable layouts and colors
--   Open for contributions (UI/UX, animations, themes, layouts etc.)
+- Responsive product listing and product pages
+- Cart and checkout flow UI (demo hooks and API routes)
+- Seller dashboard skeleton (product list, orders)
+- Reusable components and Tailwind-based styling
 
----
+## Quick Start
 
-## Getting Started
+1. Install dependencies
 
-1. Clone the repo
+```bash
+npm install
+```
 
-    ```bash
-    git clone https://github.com/GreatStackDev/QuickCart.git
-    cd QuickCart
-    ```
+2. Run development server
 
-2. Install dependencies
+```bash
+npm run dev
+```
 
-    ```bash
-    npm install
-    ```
+3. Open in the browser
 
-3. Run locally
+Visit http://localhost:3000 to view the app.
 
-    ```bash
-    npm run dev
-    ```
+Notes:
+- If you have environment variables, add them to a `.env.local` file at the project root. This repo runs with local/mock API routes by default.
+- Do not change code in `app/` unless you intend to modify UI or behavior—this README update intentionally leaves code untouched.
 
----
+## Project Structure (short)
+
+- `app/` — Next.js App Router pages, components, and API routes (see `app/api/`)
+- `components/` — UI components used across pages
+- `lib/`, `config/`, `models/` — small helpers and data models used by API routes
+- `public/` — static assets
 
 ## Contributing
 
-We welcome all kinds of contributions! You can:
+Contributions are welcome. Typical ways to help:
 
-- Create new pages
-- Improve layouts
-- Add animations and transitions
-- Enhance responsiveness
-- Refactor components
-- Suggest new UI/UX ideas
-- Add themes or color variations
-- Introduce accessibility improvements
-- Add filtering/search features
-- Improve documentation
+- Improve accessibility and responsiveness
+- Add unit or integration tests for components
+- Enhance documentation and examples
+- Improve performance and reduce bundle size
 
-Check out [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for guidelines.
-
----
+Please follow the contribution guidelines in `docs/CONTRIBUTING.md`.
 
 ## License
 
-This project is licensed under the **MIT License**.
+This project is licensed under the MIT License. See `docs/LICENSE.md` or the `LICENSE` file for details.
 
 ---
 
-## 🌟 Contributors
-
-Thanks to everyone who contributes to **QuickCart**!
+If you want, I can also add a short development checklist or run formatting checks next. 
